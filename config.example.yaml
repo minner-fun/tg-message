@@ -1,0 +1,40 @@
+# Telegram 频道监控 + 飞书通知 配置文件
+# 复制本文件为 config.yaml 并填写真实信息
+
+telegram:
+  # 从 https://my.telegram.org 获取
+  api_id: 12345678
+  api_hash: ""
+  phone: ""
+  session_name: "tg_monitor"
+  # TG 代理（留空则不使用代理）
+  # 支持 socks5 / socks4 / http
+#  proxy: "socks5://127.0.0.1:9988"
+
+feishu:
+  # 在飞书群 -> 设置 -> 群机器人 -> 添加自定义机器人 获取 Webhook URL
+  webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/xxxx"
+  # 飞书代理（留空则不使用代理，飞书一般国内直连不需要代理）
+  proxy: ""
+
+monitor:
+  # 要监控的频道/群组（可以是用户名或数字ID）
+  # 用户名不需要加 @ 符号
+  # 设置为 ["all"] 或留空 [] 则监控所有已加入的频道/群组
+  channels:
+    - "all"
+    # - "channel_username_1"
+    # - "channel_username_2"
+    # - -1001234567890  # 也支持数字ID
+
+  # 关键词列表（不区分大小写）
+  keywords:
+    - "远程爬虫"
+    - "爬虫"
+    - "逆向"
+    - "数据采集"
+
+  # 可选：正则表达式匹配（留空则不启用）
+  regex_patterns: []
+    # - "\\d+元"           # 匹配价格
+    # - "https?://\\S+"    # 匹配链接
