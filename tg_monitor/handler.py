@@ -55,8 +55,7 @@ def _normalize_chat_id(chat_id):
 
 def _is_our_notification_message(text: str) -> bool:
     """忽略机器人自己发出的通知，避免通知内容再次命中关键词。"""
-    normalized = text.lstrip("* \n\t")
-    return normalized.startswith(NOTIFICATION_TITLE)
+    return text.strip().startswith(NOTIFICATION_TITLE)
 
 
 def register_handler(client, config: dict, channel_ids: list[int] | None = None):
@@ -133,8 +132,9 @@ def register_handler(client, config: dict, channel_ids: list[int] | None = None)
         else:
             msg_link = ""
 
+        truncated = text[:80] + ("..." if len(text) > 80 else "")
         logger.info(
-            f"[命中] 频道: {chat_title} | 关键词: {matched_keywords} | 消息: {text[:80]}..."
+            f"[命中] 频道: {chat_title} | 关键词: {matched_keywords} | 消息: {truncated}"
         )
 
         # 发送 Telegram 机器人通知
